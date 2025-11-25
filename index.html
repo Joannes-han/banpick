@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoL Fearless Draft</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="background-overlay"></div>
+
+    <div class="draft-container">
+        
+        <div class="team-column blue-team">
+            <div class="team-header">BLUE TEAM</div>
+            <div class="ban-container">
+                <div class="ban-slot empty"></div><div class="ban-slot empty"></div><div class="ban-slot empty"></div><div class="ban-slot empty"></div><div class="ban-slot empty"></div>
+            </div>
+            <div class="pick-container">
+                <div class="pick-slot"><div class="slot-bg"></div><span class="role-icon">TOP</span></div>
+                <div class="pick-slot"><div class="slot-bg"></div><span class="role-icon">JUNGLE</span></div>
+                <div class="pick-slot"><div class="slot-bg"></div><span class="role-icon">MID</span></div>
+                <div class="pick-slot"><div class="slot-bg"></div><span class="role-icon">ADC</span></div>
+                <div class="pick-slot"><div class="slot-bg"></div><span class="role-icon">SUP</span></div>
+            </div>
+        </div>
+
+        <div class="center-column">
+            <div style="height: 30px;"></div>
+            <div class="phase-indicator">BAN PHASE</div>
+
+            <div class="mode-toggle-area">
+                <label class="switch-label">피어리스 모드</label>
+                <label class="switch">
+                    <input type="checkbox" id="fearless-toggle">
+                    <span class="slider"></span>
+                </label>
+                <button id="history-view-btn" class="history-btn hidden">📜 지난 경기 기록</button>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="champion-search" placeholder="챔피언 검색..." autocomplete="off">
+            </div>
+
+            <div class="champion-grid-area">
+                <div id="champion-list" class="champion-grid"></div>
+            </div>
+
+            <div class="menu-area">
+                <button id="undo-btn" class="hextech-btn">↩ 되돌리기</button>
+                <button id="finish-btn" class="hextech-btn">결과 보기</button>
+                <button id="next-game-btn" class="hextech-btn" style="color: #00FF00; border-color: #00FF00;">NEXT GAME >></button>
+                <button id="reset-btn" class="hextech-btn">↺ 완전 초기화</button>
+            </div>
+        </div>
+
+        <div class="team-column red-team">
+            <div class="team-header">RED TEAM</div>
+            <div class="ban-container">
+                <div class="ban-slot empty"></div><div class="ban-slot empty"></div><div class="ban-slot empty"></div><div class="ban-slot empty"></div><div class="ban-slot empty"></div>
+            </div>
+            <div class="pick-container">
+                <div class="pick-slot"><span class="role-icon">TOP</span><div class="slot-bg"></div></div>
+                <div class="pick-slot"><span class="role-icon">JUNGLE</span><div class="slot-bg"></div></div>
+                <div class="pick-slot"><span class="role-icon">MID</span><div class="slot-bg"></div></div>
+                <div class="pick-slot"><span class="role-icon">ADC</span><div class="slot-bg"></div></div>
+                <div class="pick-slot"><span class="role-icon">SUP</span><div class="slot-bg"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="result-modal" class="modal hidden">
+    <div class="result-content">
+        <div class="result-header">MATCH START</div>
+        
+        <div id="final-matchup-list" class="matchup-grid">
+            </div>
+
+        <div class="result-actions">
+            <button id="close-result-btn" class="hextech-btn">닫기</button>
+        </div>
+    </div>
+</div>
+
+    <div id="history-modal" class="modal hidden">
+        <div class="result-content history-content">
+            <div class="result-header" style="font-size: 2rem;">MATCH HISTORY</div>
+            <div id="match-history-container">
+                </div>
+            <div class="result-actions">
+                <button id="close-history-btn" class="hextech-btn">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
