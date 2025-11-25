@@ -134,7 +134,6 @@ fearlessToggle.addEventListener('change', (e) => {
 });
 
 document.getElementById('next-game-btn').addEventListener('click', () => {
-    if (!confirm("현재 픽을 기록하고 다음 세트로 넘어가시겠습니까?")) return;
 
     const currentBluePicks = [];
     const currentRedPicks = [];
@@ -333,5 +332,6 @@ function setupSwapListeners() {
         });
     });
 }
+
 
 initChampionData();
