@@ -1,317 +1,202 @@
-/* --- 1. 기본 설정 및 변수 --- */
+/* --- 1. 기본 설정 (LoL 클라이언트 테마) --- */
 :root {
-    --lol-gold: #C8AA6E;
-    --lol-blue: #0AC8B9;
-    --lol-dark: #091428;
-    --lol-grey: #A09B8C;
-    --bg-overlay: rgba(1, 10, 19, 0.9);
+    --lol-gold: #C8AA6E;       /* 프레스티지 골드 */
+    --lol-gold-dim: #937341;   /* 어두운 골드 */
+    --lol-blue: #00B4D8;       /* 헥스텍 블루 */
+    --lol-dark: #010A13;       /* 딥 다크 네이비 background */
+    --lol-grey: #A09B8C;       /* 기본 텍스트 */
+    --lol-text-hover: #F0E6D2; /* 밝은 텍스트 */
+    --lol-border: #3C3C41;     /* 기본 테두리 */
 }
 
 body { 
     background-color: var(--lol-dark); 
-    color: var(--lol-gold); 
-    font-family: 'Segoe UI', sans-serif; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    height: 100vh; 
-    margin: 0;
-    overflow: hidden; 
+    color: var(--lol-grey); 
+    font-family: 'Beaufort for LOL', 'Segoe UI', sans-serif; 
+    display: flex; flex-direction: column; align-items: center; justify-content: center; 
+    height: 100vh; margin: 0; overflow: hidden;
+    user-select: none;
 }
 
-/* 배경 어둡게 */
+/* 배경 */
 .background-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: radial-gradient(circle at center, #1E2328 0%, #010A13 100%);
     z-index: -1;
 }
 
-/* --- 2. 전체 레이아웃 (3단 분할) --- */
+/* --- 2. 레이아웃 --- */
 .draft-container {
-    display: flex;
-    width: 100%;
-    height: 100vh;
-    padding: 20px 40px;
-    box-sizing: border-box;
-    gap: 20px;
+    display: flex; width: 100%; height: 100vh; 
+    padding: 15px 30px; box-sizing: border-box; gap: 20px;
 }
 
-.team-column {
-    flex: 1; 
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
+.team-column { flex: 0.8; display: flex; flex-direction: column; gap: 10px; }
+.center-column { flex: 1.4; display: flex; flex-direction: column; align-items: center; min-width: 0; }
 
-.center-column {
-    flex: 1.2; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+/* 텍스트 스타일 */
+.team-header { font-size: 1.8rem; font-weight: 800; text-align: center; letter-spacing: 3px; margin-bottom: 5px; }
+.blue-team .team-header { color: var(--lol-blue); text-shadow: 0 0 15px rgba(0, 180, 216, 0.5); }
+.red-team .team-header { color: #FF4444; text-shadow: 0 0 15px rgba(255, 68, 68, 0.5); }
+.phase-indicator { font-size: 1.2rem; font-weight: bold; color: var(--lol-gold); margin-bottom: 10px; letter-spacing: 1px; }
 
-/* --- 3. 텍스트 및 헤더 --- */
-.team-header {
-    font-size: 2rem;
-    font-weight: 800;
-    text-align: center;
-    letter-spacing: 5px;
-    margin-bottom: 10px;
-}
-.blue-team .team-header { color: var(--lol-blue); text-shadow: 0 0 15px var(--lol-blue); }
-.red-team .team-header { color: #FF4444; text-shadow: 0 0 15px #FF4444; }
-
-.phase-indicator {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--lol-gold);
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* --- 4. 밴/픽 슬롯 디자인 --- */
-
-/* 밴 카드 */
-.ban-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
+/* --- 3. 밴 & 픽 슬롯 --- */
+.ban-container { display: flex; justify-content: center; gap: 5px; margin-bottom: 10px; }
 .ban-slot {
-    width: 60px; height: 60px;
-    border: 1px solid #444;
-    background: rgba(0,0,0,0.5);
-    background-size: cover; 
-    transition: 0.3s;
-    position: relative;
+    width: 50px; height: 50px; 
+    border: 1px solid var(--lol-border); background: #000; position: relative;
+    box-shadow: inset 0 0 10px #000;
 }
 
-/* 픽 카드 */
-.pick-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex-grow: 1;
-    height: 100%;
-}
-
+.pick-container { display: flex; flex-direction: column; gap: 5px; flex-grow: 1; height: 100%; }
 .pick-slot {
-    position: relative;
-    height: auto;
-    flex-grow: 1;
-    border: 1px solid #444;
-    background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(20,20,20,0.4) 100%);
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    overflow: hidden;
-    transition: 0.3s;
+    position: relative; flex-grow: 1; 
+    border: 1px solid var(--lol-border); background: #000; 
+    display: flex; align-items: center; padding: 0 15px; transition: all 0.2s;
 }
+.blue-team .pick-slot { border-left: 3px solid var(--lol-blue); background: linear-gradient(90deg, rgba(0, 10, 20, 0.8) 0%, rgba(0,0,0,0) 100%); flex-direction: row; }
+.red-team .pick-slot { border-right: 3px solid #FF4444; background: linear-gradient(-90deg, rgba(20, 5, 5, 0.8) 0%, rgba(0,0,0,0) 100%); flex-direction: row-reverse; }
 
-.blue-team .pick-slot { border-left: 5px solid var(--lol-blue); flex-direction: row; }
-.red-team .pick-slot { border-right: 5px solid #FF4444; flex-direction: row-reverse; background: linear-gradient(-90deg, rgba(0,0,0,0.8) 0%, rgba(20,20,20,0.4) 100%); }
+.role-icon { font-size: 0.8rem; color: #555; font-weight: bold; letter-spacing: 1px; }
 
-.role-icon {
-    font-size: 0.9rem;
-    color: #666;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
+.active-turn { border-color: var(--lol-gold) !important; box-shadow: 0 0 15px var(--lol-gold-dim); }
 
-/* --- 5. 활성화 및 선택 효과 --- */
+.slot-filled { background-size: cover !important; background-position: center 15% !important; }
+.ban-slot.slot-filled { filter: grayscale(100%) brightness(0.5); background-position: center center !important; }
+.ban-slot.slot-filled::after { content: "X"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #FF4444; font-size: 2rem; font-weight: 800; opacity: 0.8; }
+.pick-slot.slot-filled .role-icon, .pick-slot.slot-filled .slot-bg { display: none; }
 
-.active-turn {
-    border-color: var(--lol-gold) !important;
-    box-shadow: 0 0 15px var(--lol-gold), inset 0 0 10px var(--lol-gold);
-    animation: pulseBorder 1.5s infinite;
-}
-@keyframes pulseBorder {
-    0% { border-color: var(--lol-gold); box-shadow: 0 0 10px var(--lol-gold); }
-    50% { border-color: #fff; box-shadow: 0 0 25px var(--lol-gold); }
-    100% { border-color: var(--lol-gold); box-shadow: 0 0 10px var(--lol-gold); }
-}
+/* 드래그 효과 */
+.pick-slot[draggable="true"] { cursor: grab; }
+.pick-slot.dragging { opacity: 0.5; border: 1px dashed var(--lol-gold); cursor: grabbing; }
+.pick-slot.drag-over { background: rgba(200, 170, 110, 0.1) !important; border-color: var(--lol-gold) !important; }
 
-.slot-filled {
-    background-size: cover !important;
-    background-position: center 15% !important; /* 얼굴 중심 */
-    background-repeat: no-repeat !important;
-}
-
-.ban-slot.slot-filled {
-    filter: grayscale(100%) brightness(0.6);
-    background-position: center center !important;
-}
-.ban-slot.slot-filled::after {
-    content: "X";
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    color: #FF4444;
-    font-size: 2.5rem;
-    font-weight: bold;
-    opacity: 0.8;
-    text-shadow: 0 0 5px black;
-}
-
-.pick-slot.slot-filled .role-icon, 
-.pick-slot.slot-filled .slot-bg {
-    display: none;
-}
-
-/* --- 6. 중앙 컨트롤 & 챔피언 그리드 --- */
-
-.mode-toggle-area {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-    background: rgba(0,0,0,0.6);
-    padding: 8px 25px;
-    border-radius: 30px;
-    border: 1px solid #444;
-}
-.switch-label { font-weight: bold; color: var(--lol-gold); }
-
-.switch { position: relative; display: inline-block; width: 40px; height: 20px; }
+/* --- 4. 중앙 컨트롤 --- */
+.mode-toggle-area { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
+.switch-label { font-weight: bold; color: var(--lol-grey); font-size: 0.9rem; }
+.switch { position: relative; display: inline-block; width: 36px; height: 18px; }
 .switch input { opacity: 0; width: 0; height: 0; }
-.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #555; transition: .4s; border-radius: 20px; }
-.slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 2px; bottom: 2px; background-color: white; transition: .4s; border-radius: 50%; }
-input:checked + .slider { background-color: var(--lol-gold); }
-input:checked + .slider:before { transform: translateX(20px); }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #1E2328; border: 1px solid var(--lol-border); transition: .3s; }
+.slider:before { position: absolute; content: ""; height: 12px; width: 12px; left: 2px; bottom: 2px; background-color: var(--lol-grey); transition: .3s; }
+input:checked + .slider { border-color: var(--lol-gold); }
+input:checked + .slider:before { transform: translateX(18px); background-color: var(--lol-gold); }
 
-.history-btn {
-    background: #333;
-    border: 1px solid #666;
-    color: #ccc;
-    padding: 5px 12px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    border-radius: 5px;
-    transition: 0.2s;
+/* 버튼 스타일 */
+.history-btn, .hextech-btn {
+    background: #1E2328; border: 1px solid var(--lol-border); color: var(--lol-gold);
+    padding: 6px 15px; cursor: pointer; font-size: 0.8rem; font-weight: bold; transition: all 0.2s;
 }
-.history-btn:hover { background: #555; color: white; border-color: #999; }
+.history-btn:hover, .hextech-btn:hover { background: #1E282D; border-color: var(--lol-gold); color: #FFF; }
 .hidden { display: none !important; }
 
-.search-container { width: 100%; margin-bottom: 10px; }
-#champion-search {
-    width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.5); border: 1px solid var(--lol-gold);
-    color: white; font-size: 1rem; text-align: center; outline: none;
+/* 필터 아이콘 그룹 */
+.filter-btn-group { display: flex; gap: 5px; margin-bottom: 10px; }
+.filter-btn {
+    width: 32px; height: 32px; padding: 6px;
+    background: transparent; border: none; cursor: pointer; opacity: 0.4; transition: 0.2s;
 }
+.filter-btn img { width: 100%; height: 100%; object-fit: contain; }
+.filter-btn:hover { opacity: 0.8; }
+.filter-btn.active { opacity: 1; filter: drop-shadow(0 0 3px var(--lol-gold)); }
 
-.champion-grid-area {
-    display: block; width: 100%; flex-grow: 1; background: rgba(1, 10, 19, 0.6);
-    border: 1px solid #333; overflow-y: auto; padding: 15px; box-sizing: border-box;
-    scrollbar-width: thin; scrollbar-color: var(--lol-gold) #091428;
+.search-container { width: 100%; margin-bottom: 5px; max-width: 720px; /* 검색창 너비도 그리드에 맞춤 */ }
+#champion-search {
+    width: 100%; padding: 8px 10px; box-sizing: border-box;
+    background: #000; border: 1px solid var(--lol-border); color: white; font-size: 0.9rem; outline: none;
 }
+#champion-search:focus { border-color: var(--lol-gold); }
+
+/* --- 5. 챔피언 그리드 (수정됨: 간격 확대) --- */
+.champion-grid-area {
+    display: block; width: 100%; flex-grow: 1;
+    background: #010A13; 
+    border-top: 1px solid var(--lol-border); border-bottom: 1px solid var(--lol-border);
+    overflow-y: auto; 
+    padding: 15px 10px; 
+    box-sizing: border-box;
+    display: flex; justify-content: center; /* 그리드 중앙 정렬 */
+}
+/* 스크롤바 */
+.champion-grid-area::-webkit-scrollbar { width: 6px; }
+.champion-grid-area::-webkit-scrollbar-track { background: #010A13; }
+.champion-grid-area::-webkit-scrollbar-thumb { background: var(--lol-gold-dim); }
 
 .champion-grid {
-    display: grid; width: 100%; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-    gap: 8px; align-content: start;
+    display: grid;
+    /* 6개씩 배치 */
+    grid-template-columns: repeat(6, 1fr); 
+    
+    /* [핵심 수정] 간격을 대폭 늘림 (12px -> 25px) */
+    gap: 25px; 
+    align-content: start;
+    
+    /* [핵심 수정] 전체 너비를 늘려서 간격이 들어갈 공간 확보 (580px -> 720px) */
+    /* 이렇게 하면 타일 크기는 그대로(~80px) 유지되면서 사이만 벌어집니다 */
+    width: 100%;
+    max-width: 720px; 
 }
 
+/* 챔피언 타일 */
 .champion-card {
-    cursor: pointer; position: relative; transition: transform 0.1s;
+    cursor: pointer; position: relative;
+    background: transparent; border: none;
+    display: flex; flex-direction: column; align-items: center;
+    margin-bottom: 5px;
 }
-.champion-card:hover { transform: scale(1.1); z-index: 10; border-color: var(--lol-gold); }
-.champion-card img { width: 100%; border: 1px solid #444; display: block; }
-.champion-name {
-    display: none; position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%);
-    background: #000; color: #fff; font-size: 0.8rem; white-space: nowrap; z-index: 20;
-    padding: 4px 8px; border: 1px solid var(--lol-gold);
-}
-.champion-card:hover .champion-name { display: block; }
 
-.fearless-banned {
-    filter: grayscale(100%) brightness(0.2); pointer-events: none; opacity: 0.6;
+/* 이미지 스타일 (얇은 테두리) */
+.champion-card img {
+    width: 100%; aspect-ratio: 1/1; object-fit: cover;
+    border: 1px solid #444; 
+    box-sizing: border-box; 
+    transition: all 0.2s;
 }
-.fearless-banned::after {
-    content: "USED"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    color: #FF4444; font-weight: bold; font-size: 0.8rem; z-index: 15; text-shadow: 0 0 3px black;
+
+/* 마우스 올렸을 때 */
+.champion-card:hover img {
+    border: 1px solid var(--lol-gold);
+    filter: brightness(1.2);
+    transform: scale(1.1); /* 호버 시 조금 더 커지게 강조 */
 }
+
+/* 이름 텍스트 */
+.champion-name {
+    margin-top: 6px;
+    font-size: 0.7rem; 
+    color: var(--lol-grey);
+    text-align: center; width: 100%;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.champion-card:hover .champion-name { color: var(--lol-text-hover); }
+
+/* 랜덤 카드 */
+.random-card img { padding: 15px; box-sizing: border-box; filter: invert(0.3); border: 1px solid #333; }
+.random-card:hover img { filter: invert(0) sepia(1) hue-rotate(180deg); border-color: var(--lol-blue); }
+
+/* 피어리스 밴 */
+.fearless-banned { opacity: 0.3; pointer-events: none; }
+.fearless-banned img { filter: grayscale(100%); }
+.fearless-banned::after { content: "🔒"; position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%); font-size: 1.5rem; }
 
 .menu-area { margin-top: 15px; display: flex; gap: 10px; }
-.hextech-btn {
-    background: linear-gradient(180deg, #1E2328 0%, #1E282D 100%);
-    border: 2px solid var(--lol-gold); color: var(--lol-gold); padding: 10px 20px;
-    cursor: pointer; font-weight: bold; text-transform: uppercase; transition: 0.2s;
-}
-.hextech-btn:hover { background: var(--lol-gold); color: #000; box-shadow: 0 0 15px var(--lol-gold); }
 
-/* --- 7. 모달 (결과창 & 기록창) --- */
-.modal {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center;
-    z-index: 1000; backdrop-filter: blur(5px);
-}
+/* --- 6. 모달 스타일 (기존 유지) --- */
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px); }
+.result-content { width: 900px; background: #010A13; border: 2px solid var(--lol-gold); padding: 40px; box-shadow: 0 0 50px rgba(0,0,0,0.8); text-align: center; max-height: 90vh; overflow-y: auto; }
+.result-header { font-size: 2.5rem; color: #FFF; margin-bottom: 30px; letter-spacing: 5px; text-shadow: 0 0 10px var(--lol-gold); }
+.matchup-grid { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+.match-row { display: flex; align-items: center; justify-content: space-between; height: 70px; gap: 10px; }
+.final-banner { flex: 1; height: 100%; background-color: #111; background-size: cover; background-position: center 20%; border: 1px solid #333; position: relative; transition: 0.3s; }
+.blue-banner { border-left: 3px solid var(--lol-blue); }
+.red-banner { border-right: 3px solid #FF4444; }
+.final-banner:hover { transform: scale(1.02); z-index: 10; border-color: #AAA; }
+.lane-icon { width: 40px; height: 40px; background-size: contain; background-repeat: no-repeat; background-position: center; filter: drop-shadow(0 0 5px var(--lol-gold)); opacity: 0.8; }
 
-.result-content {
-    width: 85%; max-width: 1000px; background: #010A13; border: 2px solid var(--lol-gold);
-    padding: 40px; text-align: center; max-height: 90vh; overflow-y: auto;
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-}
-
-.result-header {
-    font-size: 2.5rem; font-weight: 900; color: #fff;
-    text-shadow: 0 0 20px var(--lol-gold); margin-bottom: 30px; letter-spacing: 5px;
-}
-
-.matchup-grid {
-    display: flex; flex-direction: column; gap: 15px;
-    width: 100%; max-width: 900px; margin: 0 auto;
-}
-
-.match-row {
-    display: flex; align-items: center; justify-content: space-between;
-    height: 80px; gap: 20px;
-}
-
-.final-banner {
-    flex: 1; height: 100%;
-    background-size: cover; background-position: center 20%;
-    border: 1px solid #444; position: relative;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: 0.3s;
-    background-color: #1E2328;
-}
-.blue-banner { border-left: 4px solid var(--lol-blue); }
-.red-banner { border-right: 4px solid #FF4444; }
-.final-banner:hover { transform: scale(1.02); z-index: 10; border-color: #fff; }
-
-.lane-icon {
-    width: 50px; height: 50px;
-    background-size: contain; background-repeat: no-repeat; background-position: center;
-    filter: drop-shadow(0 0 5px var(--lol-gold)); opacity: 0.8;
-}
-
-/* 경기 기록(History) 모달 스타일 */
-.history-row {
-    border-bottom: 1px solid #333; padding: 15px 0;
-    display: flex; flex-direction: column; gap: 10px; text-align: left;
-}
-.history-game-title {
-    color: var(--lol-gold); font-size: 1.3rem; font-weight: bold;
-    border-left: 4px solid var(--lol-gold); padding-left: 10px;
-}
-.history-content-box {
-    display: flex; gap: 20px; align-items: center;
-    background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px;
-}
+.history-row { border-bottom: 1px solid #333; padding: 15px 0; display: flex; flex-direction: column; gap: 10px; }
+.history-game-title { color: var(--lol-gold); font-size: 1.1rem; font-weight: bold; padding-left: 10px; border-left: 3px solid var(--lol-gold); text-align: left; }
+.history-content-box { display: flex; gap: 20px; align-items: center; background: rgba(255,255,255,0.03); padding: 10px; border-radius: 4px; }
 .history-team-group { flex: 1; display: flex; align-items: center; gap: 5px; }
-
-/* [중요] 레드팀 그룹은 오른쪽 정렬 */
 .history-team-group:last-child { justify-content: flex-end; }
-
-.history-team-group img { width: 45px; height: 45px; border: 1px solid #555; border-radius: 4px; }
-.blue-label { color: var(--lol-blue); font-weight: bold; width: 50px; margin-right: 15px; }
-.red-label { color: #FF4444; font-weight: bold; width: 50px; margin-left: 15px; text-align: right;}
-
-/* 스왑 모드 */
-.swap-mode .pick-slot { cursor: pointer; }
-.swap-mode .pick-slot:hover { box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
-.swap-selected {
-    border-color: #00FF00 !important; box-shadow: 0 0 20px #00FF00 !important;
-    transform: scale(1.02); z-index: 100;
-}
+.history-team-group img { width: 40px; height: 40px; border: 1px solid #444; }
+.blue-label { color: var(--lol-blue); font-weight: bold; margin-right: 15px; }
+.red-label { color: #FF4444; font-weight: bold; margin-left: 15px; }
